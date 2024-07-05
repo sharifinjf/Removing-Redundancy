@@ -30,3 +30,6 @@ One of the most important challenges in the preparation and maintenance of datab
 ### Step 3: Using Two-Dimensional Algorithms
 1. Navigate to the `Remove column and row` directory.
 2. Select and run either `slec_crop.m` or `SPACA_crop.m`.
+
+## Contributing
+Feel free to contribute by submitting issues or pull requests. Your feedback and contributions are welcome!
