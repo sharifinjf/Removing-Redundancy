@@ -35,6 +35,7 @@ One of the most important challenges in the preparation and maintenance of datab
 Feel free to contribute by submitting issues or pull requests. Your feedback and contributions are welcome!
 
 If you find this codebase useful, please consider citing:
+```bibtex
 @article{sharifi2019removing,
   title={Removing redundancy data with preserving the structure and visuality in a database},
   author={Sharifi Najafabadi, Ali Asghar and Torkamani Azar, Farah},
