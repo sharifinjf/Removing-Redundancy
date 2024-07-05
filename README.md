@@ -1,14 +1,14 @@
 <p align="center">
   <img src="Images/Row.png" > <br>
-  **Row Images**
+  *Row Images*
 </p>
 
 <p align="center">
   <img src="Images/1D.png"> <br>
-  **1D**
+  *1D*
 </p>
 
 <p align="center">
   <img src="Images/2D.png" > <br>
-  **2D**
+  *2D*
 </p>
