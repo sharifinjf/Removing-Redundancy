@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Images/Row.png" alt="Image 1 description" width="700" height="250"> <br>
+  <img src="Images/Row.png" > <br>
   **Row Images**
 </p>
 
