@@ -1,0 +1,63 @@
+%% IN ThE NAME OF ALLAH
+clc; clear ; close all;
+max_dimension = 60;     % maximum dimention for recognition
+k = 5;                  % k fo K Nearest neighborhood classification
+%% loud data
+% 1.orginal Yeal 2.manually crop Yeal 3.ORL 4.coil_20 5.FEI 6.digits data
+n   = 3;
+[x] = load_data(n);   %call function load data
+m   = 2;
+[x1]= load_data(m);   %call function load data
+%----------------------------------orl-------------------------------------
+ % % % class number = 40
+ % % % observition each class = 10
+%--------------------------------- FEI-------------------------------------
+ % % % class number = 200
+ % % % observition each class = 14
+% --------------------------------Yeal-------------------------------------
+ % % % class number = 15
+ % % % observition each class = 11
+%--------------------------------coil_20-----------------------------------
+ % % % class number = 20
+ % % % observition each class = 72
+%-------------------------------- digits--------------------------------------
+ % % % x_train = x{1,1} label_train = {1,2}
+ % % % x_test  = x{2,1] label_test  = {2,2}
+%% produce train and test sequnce
+numberclass          = 15;
+numbertrainingsample = 5;
+numbereachclass      = 11;
+numertestsample      = numbereachclass-numbertrainingsample;
+% call function train and test 
+[x_train_mc,lable_train,lable_test,x_test_mc] = train_test(x1,numberclass,numbertrainingsample,numbereachclass); %  train and test for manuly crop data
+[x_train,~,~,x_test]                          =  train_test(x,numberclass,numbertrainingsample,numbereachclass);  %  train and test data for automatic data
+%% parameter for crop-SPCA function
+[n,m,~]               = size(x_train);
+delta_r               = inf;            % delta_r = inf
+stop_r                = -(292);         % stop_r  = m-10 ; -m<stop_r<-1
+delta_l               = inf;            % delta_r = inf
+stop_l                = -(220);         % stop_l = n-10  -n<stop_l<-1
+
+%% crop-spca image function
+[index_l,index_r,~,~,~,~] = crop_spca(x_train,delta_r,delta_l,stop_r,stop_l);
+%% parameter for calculate recognition rate
+d_r  = 90;           % new dimension for row crop image          % 1 < d_r < n
+d_c  = 90;           % new dimension for column crop image       % 1 < d_c < m
+%% crop image
+crop_img    = x_train(sort(index_l(1,1:d_r)),sort(index_r(1,1:d_c)),:);     % select best row and column for train data
+%% train and test sequnce
+x_train_oc  = crop_img;
+x_test_oc   = x_test(sort(index_l(1,1:d_r)),sort(index_r(1,1:d_c)),:);     %  select best row and column for test data
+%% dimensionality reduction
+% PCA
+[re_rat_pca_KNN] = PCA_RECOG (x_train,lable_train,lable_test,x_test,numberclass,numertestsample,max_dimension,k);
+%% plot
+figure(1)
+hold on 
+plot(1:max_dimension,re_rat_pca_NN_mc,'-*')
+plot(1:max_dimension,re_rat_pca_NN_oc,'-*')
+plot(1:max_dimension,re_rat_pca_KNN_mc,'-*')
+plot(1:max_dimension,re_rat_pca_KNN_oc,'-*')
+legend('manuly crop NN','automatic crop NN','manuly crop KNN','automatic crop KNN')
+xlabel('dimension')
+ylabel('recognition rate')
